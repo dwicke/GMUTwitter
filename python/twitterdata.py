@@ -20,7 +20,7 @@ class TwitterData :
 
 	numTweets = 0
 
-	def twitterDataSetup(self, usersPath, tweetsPath) :
+	def twitterDataSetup(self, usersPath, tweetsPath, minUsers) :
 		f = codecs.open(usersPath, 'r', 'utf-8')	
 		locationDict = {}
 
@@ -41,11 +41,28 @@ class TwitterData :
 
 
 		f.close()
-
-
-		#prune the users that are not in cities with more than 500 users
+#uncomment to see median and average statistics
+'''
+		userPerCity = []
+		totUsers = 0
 		for location, userList in locationDict.items():
-			if len(userList) < 500:
+			userPerCity.append(len(userList))
+			totUsers = totUsers + len(userList)
+		
+		userPerCity = sorted(userPerCity)
+		#for nUs in userPerCity:
+		#	print(nUs)
+		print("Median num users per city")
+		#print (len(userPerCity))
+		print(userPerCity[int(len(userPerCity) / 2)])
+		
+		print("Average num users per city")
+		print(int(totUsers / len(userPerCity)))
+		
+'''
+		#prune the users that are not in cities with more than minUsers users
+		for location, userList in locationDict.items():
+			if len(userList) < minUsers:
 				for curUser in userList:
 					if curUser.uID in self.userIDDict: del self.userIDDict[curUser.uID]
 			else:
@@ -75,10 +92,10 @@ class TwitterData :
 		count = 0
 		numUsers = 0
 		for a, b in self.prunedLocationDict.items():
-			if len(b) >= 500:
+			#if len(b) >= 500:
 				#print (a + " " + str(len(b)))
-				numUsers = numUsers + len(b)
-				count = count + 1
+			numUsers = numUsers + len(b)
+			count = count + 1
 		print(count)
 		print(numUsers)	
 		print(self.numTweets)

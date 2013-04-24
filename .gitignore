@@ -33,3 +33,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+#twitter data
+training_set_users.txt
+training_set_tweets.txt
