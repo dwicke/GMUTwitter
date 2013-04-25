@@ -41,8 +41,8 @@ class TwitterData :
 
 
 		f.close()
-#uncomment to see median and average statistics
-'''
+		#uncomment to see median and average statistics
+		'''
 		userPerCity = []
 		totUsers = 0
 		for location, userList in locationDict.items():
@@ -59,7 +59,7 @@ class TwitterData :
 		print("Average num users per city")
 		print(int(totUsers / len(userPerCity)))
 		
-'''
+		'''
 		#prune the users that are not in cities with more than minUsers users
 		for location, userList in locationDict.items():
 			if len(userList) < minUsers:
