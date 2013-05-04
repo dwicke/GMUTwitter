@@ -28,6 +28,7 @@ class TwitterData :
 		for line in f:
 			userID, location = line.split('\t', 1)
 			curU = TwitterUser()
+			curU.tweets = []
 			curU.uID = userID
 			curU.location = location
 			self.userIDDict[userID] = curU
