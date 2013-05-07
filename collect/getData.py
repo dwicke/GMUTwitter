@@ -17,6 +17,7 @@ def main():
     tweets = db.tweets
     print tweets
     users = tweets.find({"last_response": 200}, timeout=False)
+    users.batch_size(1500)
     print "Writing user " + str(users.count())
     for user in users:
         print 'Writing user ' + user['index']
