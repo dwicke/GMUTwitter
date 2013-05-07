@@ -1,15 +1,15 @@
 import re
 import codecs
-# Converted to work with Python 2.7
-#make the string work with print() by getting rid of anything that is not ascii
-def removeNonAscii(s): return u"".join(i for i in s if ord(i)<128)
 
-class TwitterUser(object) :
-	uID = u""
+#make the string work with print() by getting rid of anything that is not ascii
+def removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
+
+class TwitterUser :
+	uID = ""
 	tweets = []
-	location = u""
+	location = ""
 	
-class TwitterData(object) :
+class TwitterData :
 
 
 	# maps uID -> user object
@@ -21,12 +21,12 @@ class TwitterData(object) :
 	numTweets = 0
 
 	def twitterDataSetup(self, usersPath, tweetsPath, minUsers) :
-		f = codecs.open(usersPath, u'r', u'utf-8')	
+		f = codecs.open(usersPath, 'r', 'utf-8')	
 		locationDict = {}
 
 
 		for line in f:
-			userID, location = line.split(u'\t', 1)
+			userID, location = line.split('\t', 1)
 			curU = TwitterUser()
 			curU.tweets = []
 			curU.uID = userID
@@ -43,7 +43,7 @@ class TwitterData(object) :
 
 		f.close()
 		#uncomment to see median and average statistics
-		u'''
+		'''
 		userPerCity = []
 		totUsers = 0
 		for location, userList in locationDict.items():
@@ -74,13 +74,13 @@ class TwitterData(object) :
 		locationDict.clear()
 
 
-		f = codecs.open(tweetsPath, u'r',u'utf-8')
+		f = codecs.open(tweetsPath, 'r','utf-8')
 
 		self.numTweets = 0
 		for line in f:
 	
-			if len(line.split(u'\t')) == 4: ## it seems like some of the lines are not right so make sure it is good.
-				userID, tweetID, tweet, createdAt = line.split(u'\t', 3)
+			if len(line.split('\t')) == 4: ## it seems like some of the lines are not right so make sure it is good.
+				userID, tweetID, tweet, createdAt = line.split('\t', 3)
 				if userID in self.userIDDict:
 					# remove things that are not ascii so that can print...
 					self.userIDDict[userID].tweets.append(removeNonAscii(tweet))
@@ -97,6 +97,6 @@ class TwitterData(object) :
 				#print (a + " " + str(len(b)))
 			numUsers = numUsers + len(b)
 			count = count + 1
-		print count
-		print numUsers	
-		print self.numTweets
+		print(count)
+		print(numUsers)	
+		print(self.numTweets)
