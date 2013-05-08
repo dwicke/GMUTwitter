@@ -1,0 +1,5 @@
+weightedBagofWords -- each integer on the x-axis corresponds to a word that had a >50% chance of being local
+and the y-axis is the number of occurances of that word * the weight (chance it is local) for that word
+
+
+dbscan.png -- black dots are fringes and the blue are the clusters.  obtained from current IDLocalUsers.py
