@@ -3,3 +3,12 @@ and the y-axis is the number of occurances of that word * the weight (chance it 
 
 
 dbscan.png -- black dots are fringes and the blue are the clusters.  obtained from current IDLocalUsers.py
+
+secondtry.png -- based on IDLocalUsers2.py
+
+Locale Clusters -- blue are clusters (13 of them) and are able to identify clusters that marked San Francisco, San Diego, Boston, New York out of 15 cities
+
+1361 users were identified as being good candidates for clustering out of 31183 original and 19761 that were then used based on local words
+
+locales2.dat has the stats on each of the clusters and the last line (line 14) has the totals for each city.
+
