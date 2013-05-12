@@ -15,7 +15,7 @@ localDict = {}
 
 for line in f:
     word, ratio, prob = line.split(u'\t', 2)
-    if float(prob) > 0.5: ## only use words that have a > %50 chance of being local
+    if float(prob) > 0.4 and float(ratio) > 0.5 and len(word) > 2: ## only use words that have a > %50 chance of being local
         localDict[word] = float(prob)
     
 print len(localDict)
@@ -35,14 +35,22 @@ def my_tokenizer(s):
 
 
 data = open('data.txt', 'w')
+labels = open('labels.txt', 'w')
 
 locationBaseStats = []
 idx = 0
+userCount = 0
 for (userId, user) in tweetData.userIDDict.items():
     count = getCounter()
     allTweets = " ".join(user.tweets) # join all of the user's tweets
     tokenized = my_tokenizer(allTweets.lower()) # get all of the tokens 
     count.update(tokenized) # make the bag of words for the user any word not in the dict means not present
-    print user.location + '\t' + str(count.most_common(3))
-    data.write(user.location.strip())
-    [data.write("\t{0}".format(count[word])) for word in localDict.iterkeys()]
+    if len(count - getCounter()) > 0:
+        print user.location + '\t' + str(count.most_common(3))
+        labels.write(user.location.strip() + '\n')
+        [data.write("{0}\t".format(count[word])) for word in localDict.iterkeys()]
+        data.write('\n')
+        idx += 1
+    userCount += 1
+    
+print "Wrote {0} users and dropped {1}".format(idx, userCount - idx)

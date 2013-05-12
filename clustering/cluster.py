@@ -118,7 +118,7 @@ def makeTree(tree, data, numclusters, MaxDepth, name):
 
 def main():
     data = open(sys.argv[1], 'r')
-    f = np.genfromtxt(data, delimiter=" ")
+    f = np.genfromtxt(data, delimiter="\t")
     numclusters = int(sys.argv[2])
     MaxDepth = int(sys.argv[3])
     print f
